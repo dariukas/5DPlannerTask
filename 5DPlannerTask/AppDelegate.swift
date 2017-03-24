@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  5DPlannerTask
 //
-//  Created by Kristina Šlekytė on 23/03/2017.
+//  Created by Darius Miliauskas on 23/03/2017.
 //  Copyright © 2017 Darius Miliauskas. All rights reserved.
 //
 
