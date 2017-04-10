@@ -37,7 +37,7 @@ class CustomScene: SCNScene {
         sphereGeometry.firstMaterial?.diffuse.contents = UIColor.red
         self.rootNode.addChildNode(sphereNode)
     }
-    
+
     func addCamera() {
         // create and add a camera to the scene
         let cameraNode = SCNNode()
