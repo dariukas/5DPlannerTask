@@ -38,17 +38,26 @@ class ViewController: UIViewController {
         //print(parseJSON(fileName: "JSONData"))
         extract(input: parseJSON(fileName: "JSONData"))
         
-        
-        
     }
     
+    // MARK: Extracting Data
     
+    //The method get the value using keyword (the basic method)
+    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject? {
+        if let value = input[keyword] {
+            return value
+        } else {
+            print("The key \(keyword) does not exist in dictionary.")
+            return nil
+            //return input as AnyObject
+        }
+    }
+    
+    //The main method to extract data
     func extract(input: [String: AnyObject]) {
-        
         if let projectName = extractData(input: input, using: "name") as? String {
             print(projectName)
         }
-        
         if let data = extractData(input: input, using: "data") as? [String: AnyObject] {
             //            let width = extractData(input: data, using: "width")
             //            let height = extractData(input: data, using: "height")
@@ -59,6 +68,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //Extracting the properties like className, h etc.
     func extractItemProperties(_ input: [String: AnyObject]) {
         if let className = extractData(input: input, using: "className") as? String  {
             print(className)
@@ -69,16 +79,24 @@ class ViewController: UIViewController {
                     }
                 }
             }
+            
+            //check if materials can be extracted since not all objects have materials
+            if className == "Room" || className == "Wall" {
+                self.extractItemMaterials(input)
+            }
+            
+            if className != "Point" {
+                extractItems(input: input)
+            }
         }
     }
     
     func extractItemMaterials(_ input: [String: AnyObject]) {
         if let materials = extractData(input: input, using: "materials") as? [String:AnyObject]  {
-            if let indoor = extractData(input: materials, using: "indoor") as? [String:AnyObject] {
-                extractMaterial(indoor)
-            }
-            if let outdoor = extractData(input: materials, using: "outdoor") as? [String:AnyObject] {
-                extractMaterial(outdoor)
+            for side in ["indoor", "outdoor", "floor", "ceil"] {
+                if let feature = extractData(input: materials, using: side) as? [String:AnyObject] {
+                    extractMaterial(feature)
+                }
             }
         }
     }
@@ -90,6 +108,7 @@ class ViewController: UIViewController {
         if let texture = extractData(input: material, using: "texture") as? String {
             print("Texture: \(texture)")
         }
+        //"scale" & "rotate" not extracted
     }
     
     func extractItems(input: [String: AnyObject]) {
@@ -97,23 +116,15 @@ class ViewController: UIViewController {
             for item in items {
                 if let theItem = item as? [String : AnyObject] {
                     extractItemProperties(theItem)
-                    extractItemMaterials(theItem)
-                    extractItems(input: theItem)
+//                    extractItems(input: theItem)
                 }
             }
         }
     }
     
-    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject? {
-        if let value = input[keyword] {
-            return value
-        } else {
-            print("The key \(keyword) does not exist in dictionary.")
-            return nil
-            //return input as AnyObject
-        }
-    }
+    // MARK: Parsing JSON
     
+    //Parse JSON from File
     func parseJSON(fileName: String) -> [String: AnyObject] {
         if let url: URL = Bundle.main.url(forResource: fileName, withExtension: "json") {
             if let data = NSData(contentsOf: url) {
@@ -131,9 +142,7 @@ class ViewController: UIViewController {
         print("Error!! The wrong file name or the file does not exist. NB! The file name should be without the extention.")
         return [:]
     }
-    
-    
-    
+  
 }
 
 enum Element: String {
@@ -152,8 +161,6 @@ enum Element: String {
             return ["w"]
         case .Point:
             return ["x", "y"]
-        case nil:
-            return []
         }
     }
 }
