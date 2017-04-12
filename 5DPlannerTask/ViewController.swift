@@ -36,37 +36,21 @@ class ViewController: UIViewController {
     
     func run() {
         //print(parseJSON(fileName: "JSONData"))
-        extract(input: parseJSON(fileName: "JSONData"))
+//        let json = JSON()
+         //json.extract(fileName: "JSONData")
         
+        let input = JSONData.parseJSON(fileName: "JSONData")
+        Floor(item:input)
+        //JSON(input: input)
+        
+//        let project = Project(json: JSON(fileName: "JSONData"))
     }
     
     // MARK: Extracting Data
     
-    //The method get the value using keyword (the basic method)
-    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject? {
-        if let value = input[keyword] {
-            return value
-        } else {
-            print("The key \(keyword) does not exist in dictionary.")
-            return nil
-            //return input as AnyObject
-        }
-    }
     
-    //The main method to extract data
-    func extract(input: [String: AnyObject]) {
-        if let projectName = extractData(input: input, using: "name") as? String {
-            print(projectName)
-        }
-        if let data = extractData(input: input, using: "data") as? [String: AnyObject] {
-            //            let width = extractData(input: data, using: "width")
-            //            let height = extractData(input: data, using: "height")
-//            if let ground = extractData(input: data, using: "ground") as? [String: AnyObject]  {
-//                extractMaterial(ground)
-//            }
-            extractItems(input: data)
-        }
-    }
+    
+/*
     
     //Extracting the properties like className, h etc.
     func extractItemProperties(_ input: [String: AnyObject]) {
@@ -101,16 +85,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func extractMaterial(_ material: [String: AnyObject]) {
-        if let color = extractData(input: material, using: "color") as? String {
-            print("Color: \(color)")
-        }
-        if let texture = extractData(input: material, using: "texture") as? String {
-            print("Texture: \(texture)")
-        }
-        //"scale" & "rotate" not extracted
-    }
-    
     func extractItems(input: [String: AnyObject]) {
         if let items = extractData(input: input, using: "items") as? [AnyObject]  {
             for item in items {
@@ -120,29 +94,7 @@ class ViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    // MARK: Parsing JSON
-    
-    //Parse JSON from File
-    func parseJSON(fileName: String) -> [String: AnyObject] {
-        if let url: URL = Bundle.main.url(forResource: fileName, withExtension: "json") {
-            if let data = NSData(contentsOf: url) {
-                do {
-                    let object = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
-                    if let array = object as? [String: AnyObject] {
-                        return array
-                    }
-                } catch {
-                    print("Error!! Unable to parse  \(fileName).json")
-                }
-            }
-            print("Error!! Unable to load  \(fileName).json")
-        }
-        print("Error!! The wrong file name or the file does not exist. NB! The file name should be without the extention.")
-        return [:]
-    }
-  
+    }*/
 }
 
 enum Element: String {
