@@ -35,12 +35,36 @@ class ViewController: UIViewController {
     
     
     func run() {
+        
+        let data: [String : AnyObject]=[:]
+
+            let input = JSONData.parseJSON(fileName: "JSONData")
+            let json = JSON(input: input)
+            let project = Project(item: json.data!)
+            project.extract(data: json.data!)
+            
+            for item in project.items! {
+                let floor = Floor(item: item)
+                floor.extract(item)
+                for item in floor.items! {
+                    let room = Room(item: item)
+                    room.extract(item)
+                    for item in room.items! {
+                        let wall = Wall(item: item)
+                        wall.extract(item)
+                    }
+                }
+                //             let wallGeometry = SCNBox(width: point.w, height: point.h, length: point.x, chamferRadius: 0.0)
+            }
+
+        
+        
+        
         //print(parseJSON(fileName: "JSONData"))
 //        let json = JSON()
          //json.extract(fileName: "JSONData")
         
-        let input = JSONData.parseJSON(fileName: "JSONData")
-        Floor(item:input)
+
         //JSON(input: input)
         
 //        let project = Project(json: JSON(fileName: "JSONData"))
@@ -96,6 +120,49 @@ class ViewController: UIViewController {
         }
     }*/
 }
+
+protocol ExtractProtocol {
+    func extract(_ item: [String : AnyObject])
+}
+
+//protocol ItemsExtractProtocol: DataExtractProtocol {
+//    func extractItems(input: [String : AnyObject]) -> [AnyObject]
+//}
+//
+//extension ItemsExtractProtocol {
+//    func extractItems(input: [String : AnyObject]) -> [AnyObject] {
+//        if let items = extractData(input: input, using: "items") as? [AnyObject] {
+//            return items
+//            //            for item in items {
+//            //                if let theItem = item as? [String : AnyObject] {
+//            //
+//            //                }
+//            //            }
+//        }
+//        return []
+//    }
+//}
+
+protocol DataExtractProtocol {
+    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject?
+}
+
+extension DataExtractProtocol {
+    //The method get the value using keyword (the basic method)
+    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject? {
+        if let value = input[keyword] {
+            return value
+        } else {
+            print("The key \(keyword) does not exist in dictionary.")
+            return nil
+            //return input as AnyObject
+        }
+    }
+}
+
+
+
+
 
 enum Element: String {
     case Room = "Room"

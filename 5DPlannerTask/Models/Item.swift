@@ -7,66 +7,106 @@
 //
 
 import UIKit
+import SceneKit
 
-class Item: Project {
+class Item: DataExtractProtocol {
+    var items: [[String: AnyObject]]?
+    var materials: Materials?
 
+    init(item: [String : AnyObject]) {
+       // super.init()
+        if let items = extractData(input: item, using: "items") as? [[String: AnyObject]] {
+            self.items = items
+        }
+        if let materials = extractData(input: item, using: "materials") as? [String: AnyObject] {
+            self.materials = Materials(materials)
+        }
+    }
 }
 
-
-class Floor: Project {
-    var floor_H: Float?
-    var ite
+class Project: Item {
     
-    init(item: [String : AnyObject]) {
-        super.init(data: item)
-        for item in self.items1! {
-            if let theItem = item as? [String : AnyObject] {
-                if let floorH =  JSON.extractData(input: theItem, using: "h") as? Float {
-                    self.floor_H = floorH
-                    print(floorH)
-                }
-            }
-            if let items = JSON.extractData(input: theItem, using: "items") as? [AnyObject]  {
-                self.items1 = items
-            }
+    var width: Float?
+    var height: Float?
+    var ground: Material?
+    
+    func extract(data: [String: AnyObject]) {
+        if let width =  extractData(input: data, using: "width") as? Float {
+            self.width = width
+        }
+        if let height =  extractData(input: data, using: "height") as? Float {
+            self.height = height
+        }
+        if let ground = extractData(input: data, using: "ground") as? [String: AnyObject]  {
+            self.ground = Material(ground)
+        }
+    }
+}
 
+class Floor: Item {
+    
+    var floor_H: CGFloat?
+
+    func extract(_ item: [String : AnyObject]) {
+        if let value =  extractData(input: item, using: "h") as? CGFloat {
+            self.floor_H = value
         }
     }
 }
 
 class Room: Floor {
+    
     var x: CGFloat?
     var y: CGFloat?
     var z: CGFloat?
     var sX: CGFloat?
     var sY: CGFloat?
     var h: CGFloat?
-    
-    init(item: [String : AnyObject]) {
-        super.init(data: item)
+
+    override func extract(_ item: [String : AnyObject]) {
+        if let value =  extractData(input: item, using: "x") as? CGFloat {
+            self.x = value
+        }
+        if let value =  extractData(input: item, using: "y") as? CGFloat {
+            self.y = value
+        }
+        if let value =  extractData(input: item, using: "z") as? CGFloat {
+            self.z = value
+        }
+        if let value =  extractData(input: item, using: "sX") as? CGFloat {
+            self.sX = value
+        }
+        if let value =  extractData(input: item, using: "sY") as? CGFloat {
+            self.sY = value
+        }
+        if let value =  extractData(input: item, using: "h") as? CGFloat {
+            self.h = value
+        }
     }
-    
-    
 }
 
 class Wall: Room {
+    
     var w: CGFloat? //width
+    
+    override func extract(_ item: [String : AnyObject]) {
+        if let value =  extractData(input: item, using: "w") as? CGFloat {
+            self.w = value
+        }
+    }
 }
 
-
-//class Point: Wall {
-//    var pointX: CGFloat?
-//    var pointY: CGFloat?
-//    
-//    init(wall: Wall) {
-//        if let width =  JSON.extractData(input: json.data!, using: "width") as? Float {
-//            self.width = width
-//        }
-//        if let height =  JSON.extractData(input: json.data!, using: "height") as? Float {
-//            self.height = height
-//        }
-//        if let ground = JSON.extractData(input: json.data!, using: "ground") as? [String: AnyObject]  {
-//            //            self.ground = extractMaterial(ground)
-//        }
-//    }
-//}
+class Point: Wall {
+    
+    var pointX: CGFloat?
+    var pointY: CGFloat?
+    
+    override func extract(_ item: [String : AnyObject]) {
+        if let value =  extractData(input: item, using: "x") as? CGFloat {
+            self.pointX = value
+        }
+        if let value = extractData(input: item, using: "y") as? CGFloat {
+            self.pointY = value
+        }
+    }
+}

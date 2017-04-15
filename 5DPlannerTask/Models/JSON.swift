@@ -8,24 +8,27 @@
 
 import UIKit
 
-class JSON: NSObject {
+class JSON: NSObject, DataExtractProtocol {
     var projectName: String?
     var data: [String: AnyObject]?
     
     // MARK: Parsing JSON
     
     init (input: [String: AnyObject]) {
-        if let projectName = JSON.extractData(input: input, using: "name") as? String {
+        super.init()
+        if let projectName = extractData(input: input, using: "name") as? String {
             self.projectName = projectName
             print(projectName)
         }
-        if let data = JSON.extractData(input: input, using: "data") as? [String: AnyObject] {
+        if let data = extractData(input: input, using: "data") as? [String: AnyObject] {
             //Project(data: data)
             self.data = data
             //            print(data)
         }
     }
 }
+
+// MARK: Parsing JSON
 
 class JSONData {
     class func parseJSON(fileName: String) -> [String: AnyObject] {
@@ -47,17 +50,7 @@ class JSONData {
     }
 }
 
-extension JSON {
-    //The method get the value using keyword (the basic method)
-    class func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject? {
-        if let value = input[keyword] {
-            return value
-        } else {
-            print("The key \(keyword) does not exist in dictionary.")
-            return nil
-            //return input as AnyObject
-        }
-    }
+
     
     //    func extractItems(input: [String: AnyObject]) {
     //        if let items = extractData(input: input, using: "items") as? [AnyObject]  {
@@ -69,5 +62,5 @@ extension JSON {
     //            }
     //        }
     //    }
-}
+//}
 

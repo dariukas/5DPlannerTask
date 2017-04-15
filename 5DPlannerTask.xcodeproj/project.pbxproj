@@ -18,7 +18,6 @@
 		A3D85B8E1E9E37070037CDF0 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B8D1E9E37070037CDF0 /* Material.swift */; };
 		A3D85B901E9E3D530037CDF0 /* TheWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B8F1E9E3D530037CDF0 /* TheWall.swift */; };
 		A3D85B921E9E3DCB0037CDF0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B911E9E3DCB0037CDF0 /* Item.swift */; };
-		A3D85B941E9E3F140037CDF0 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B931E9E3F140037CDF0 /* Project.swift */; };
 		A3D85B981E9E67FC0037CDF0 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B971E9E67FC0037CDF0 /* JSON.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		A3D85B8D1E9E37070037CDF0 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Material.swift; path = 5DPlannerTask/Models/Material.swift; sourceTree = SOURCE_ROOT; };
 		A3D85B8F1E9E3D530037CDF0 /* TheWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TheWall.swift; path = 5DPlannerTask/Models/TheWall.swift; sourceTree = SOURCE_ROOT; };
 		A3D85B911E9E3DCB0037CDF0 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Item.swift; path = 5DPlannerTask/Models/Item.swift; sourceTree = SOURCE_ROOT; };
-		A3D85B931E9E3F140037CDF0 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Project.swift; path = 5DPlannerTask/Models/Project.swift; sourceTree = SOURCE_ROOT; };
 		A3D85B971E9E67FC0037CDF0 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = 5DPlannerTask/Models/JSON.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -77,7 +75,6 @@
 				A3D85B8D1E9E37070037CDF0 /* Material.swift */,
 				A3D85B8F1E9E3D530037CDF0 /* TheWall.swift */,
 				A3D85B911E9E3DCB0037CDF0 /* Item.swift */,
-				A3D85B931E9E3F140037CDF0 /* Project.swift */,
 			);
 			name = Models;
 			path = SCNModels;
@@ -237,7 +234,6 @@
 				A3D85B921E9E3DCB0037CDF0 /* Item.swift in Sources */,
 				A3D85B8E1E9E37070037CDF0 /* Material.swift in Sources */,
 				A36A95B61E84412600BDE440 /* CustomScene.swift in Sources */,
-				A3D85B941E9E3F140037CDF0 /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

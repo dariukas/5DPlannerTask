@@ -9,31 +9,64 @@
 import UIKit
 import SceneKit
 
-class Material: SCNMaterial {
+
+class Materials: DataExtractProtocol {
+    var materials: [String: AnyObject]?
+    
+    init(_ items: [String : AnyObject]) {
+        var materials = [String: Material]()
+        for (type, materialData) in items {
+            if let theMaterialData = materialData as? [String: AnyObject] {
+                materials[type]=Material(theMaterialData)
+            }
+        }
+        self.materials = materials
+    }
+    
+    private func createMaterial(_ material: Material) -> SCNMaterial {
+        let scnMaterial = SCNMaterial()
+        
+        if let name = material.imageName, let image = UIImage(named: name) {
+            scnMaterial.diffuse.contents = image
+        } else {
+            scnMaterial.diffuse.contents = material.color
+        }
+        return scnMaterial
+    }
+    //        if let indoor = extractData(input: materials, using: "indoor") as? [String: AnyObject] {
+    //            self.materials?.updateValue(indoor as AnyObject, forKey: "indoor")
+    //        }
+}
+
+
+class Material: DataExtractProtocol {
     //var texture: UIImage?
     var imageName: String?
     var color: UIColor?
     
-    func extractMaterial(_ material: [String: AnyObject]) {
-        //var material: Material = Material()
-        if let color = JSON.extractData(input: material, using: "color") as? String {
-            self.color = UIColor(hexString: color)
+//    init(_ material: [String: AnyObject]) {
+//        super.init()
+//        if let name = self.imageName, let image = UIImage(named: name) {
+//            self.diffuse.contents = image
+//        } else {
+//            self.diffuse.contents = self.color
+//        }
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    init(_ data: [String: AnyObject]) {
+        if let color = extractData(input: data, using: "color") as? String {
+            //self.color = UIColor(hexString: color)
             //            print("Color: \(color)")
         }
-        if let texture = JSON.extractData(input: material, using: "texture") as? String {
+        if let texture = extractData(input: data, using: "texture") as? String {
             self.imageName = texture
-            print("Texture: \(texture)")
+//            print("Texture: \(texture)")
         }
         //"scale" & "rotate" not extracted
-    }
-    
-    func createMaterial() -> SCNMaterial {
-        if let name = self.imageName, let image = UIImage(named: name) {
-            self.diffuse.contents = image
-        } else {
-            self.diffuse.contents = self.color
-        }
-        return self
     }
 }
 
