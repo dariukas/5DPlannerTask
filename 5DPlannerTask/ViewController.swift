@@ -35,22 +35,20 @@ class ViewController: UIViewController {
     
     
     func run() {
-        
-        let data: [String : AnyObject]=[:]
-
+        //let data: [String : AnyObject]=[:]
             let input = JSONData.parseJSON(fileName: "JSONData")
             let json = JSON(input: input)
-            let project = Project(item: json.data!)
-            project.extract(data: json.data!)
+            let project = Project(dataWithoutMaterial: json.data!)
+            project.extract(json.data!)
             
             for item in project.items! {
-                let floor = Floor(item: item)
+                let floor = Floor(dataWithoutMaterial: item)
                 floor.extract(item)
                 for item in floor.items! {
-                    let room = Room(item: item)
+                    let room = Room(data: item)
                     room.extract(item)
                     for item in room.items! {
-                        let wall = Wall(item: item)
+                        let wall = Wall(data: item)
                         wall.extract(item)
                     }
                 }

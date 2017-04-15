@@ -13,13 +13,20 @@ class Item: DataExtractProtocol {
     var items: [[String: AnyObject]]?
     var materials: Materials?
 
-    init(item: [String : AnyObject]) {
-       // super.init()
-        if let items = extractData(input: item, using: "items") as? [[String: AnyObject]] {
+    init(data: [String : AnyObject]) {
+       // super.init() in the case NSObject
+        if let items = extractData(input: data, using: "items") as? [[String: AnyObject]] {
             self.items = items
         }
-        if let materials = extractData(input: item, using: "materials") as? [String: AnyObject] {
+        if let materials = extractData(input: data, using: "materials") as? [String: AnyObject] {
             self.materials = Materials(materials)
+        }
+    }
+    
+    init(dataWithoutMaterial: [String : AnyObject]) {
+        // super.init()
+        if let items = extractData(input: dataWithoutMaterial, using: "items") as? [[String: AnyObject]] {
+            self.items = items
         }
     }
 }
@@ -30,7 +37,7 @@ class Project: Item {
     var height: Float?
     var ground: Material?
     
-    func extract(data: [String: AnyObject]) {
+    func extract(_ data: [String: AnyObject]) {
         if let width =  extractData(input: data, using: "width") as? Float {
             self.width = width
         }
