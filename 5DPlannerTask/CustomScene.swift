@@ -15,56 +15,31 @@ class CustomScene: SCNScene {
         super.init()
         //let scene = SCNScene(named: "sphere.obj")!
         //let scnView = self as! SCNView
-        addCamera()
-        addLights() 
-        addSphere()
-//        let background = UIImage(named: "IBLBlurred.png")
-//        scene.background.contents = background
+        setupScene()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addObjects() {
-        // retrieve the ship node
-        //let ship = self.rootNode.childNode(withName: "ship", recursively: true)!
-    }
-    
-    func addSphere() {
-        let sphereGeometry = SCNSphere(radius: 1.0)
-        let sphereNode = SCNNode(geometry: sphereGeometry)
-        sphereGeometry.firstMaterial?.diffuse.contents = UIColor.red
-        self.rootNode.addChildNode(sphereNode)
-    }
+    func setupScene() {
+        let omniLight = LightNode(type: .omni)
+        omniLight.position = SCNVector3(x: 0, y: 10, z: 10)
+        self.rootNode.addChildNode(omniLight)
+        
+        let ambientLight = LightNode(type: .ambient)
+        ambientLight.color = UIColor.darkGray
+        self.rootNode.addChildNode(ambientLight)
+        
+        let camera = CameraNode()
+        camera.position = SCNVector3(x: 0, y: 0, z: 15)
+        self.rootNode.addChildNode(camera)
 
-    func addCamera() {
-        // create and add a camera to the scene
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        self.rootNode.addChildNode(cameraNode)
-        
-        // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
+        setupEnviromentLights()
     }
     
-    func addLights() {
-        // create and add a light to the scene
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-        self.rootNode.addChildNode(lightNode)
-        
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor.darkGray
-        self.rootNode.addChildNode(ambientLightNode)
-    }
-    
-    func addEnviromentLights() {
+    private func setupEnviromentLights() {
         let environment = UIImage(named: "IBL.png")
         self.lightingEnvironment.contents = environment
         self.lightingEnvironment.intensity = 2.0

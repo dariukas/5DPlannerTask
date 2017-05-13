@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A31CA1761EC73EAE00023460 /* laminate_1_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A31CA1731EC73EAE00023460 /* laminate_1_2.jpg */; };
+		A31CA1771EC73EAE00023460 /* path_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A31CA1741EC73EAE00023460 /* path_6.jpg */; };
+		A31CA1781EC73EAE00023460 /* wallp_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A31CA1751EC73EAE00023460 /* wallp_0.jpg */; };
+		A31CA17B1EC73FCB00023460 /* Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31CA17A1EC73FCB00023460 /* Other.swift */; };
 		A36A95601E841AA000BDE440 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36A955F1E841AA000BDE440 /* AppDelegate.swift */; };
 		A36A95621E841AA000BDE440 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36A95611E841AA000BDE440 /* ViewController.swift */; };
 		A36A95651E841AA000BDE440 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A36A95631E841AA000BDE440 /* Main.storyboard */; };
@@ -16,7 +20,7 @@
 		A36A95861E84397900BDE440 /* JSONData.json in Resources */ = {isa = PBXBuildFile; fileRef = A36A95851E84397900BDE440 /* JSONData.json */; };
 		A36A95B61E84412600BDE440 /* CustomScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36A95B51E84412600BDE440 /* CustomScene.swift */; };
 		A3D85B8E1E9E37070037CDF0 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B8D1E9E37070037CDF0 /* Material.swift */; };
-		A3D85B901E9E3D530037CDF0 /* TheWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B8F1E9E3D530037CDF0 /* TheWall.swift */; };
+		A3D85B901E9E3D530037CDF0 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B8F1E9E3D530037CDF0 /* Node.swift */; };
 		A3D85B921E9E3DCB0037CDF0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B911E9E3DCB0037CDF0 /* Item.swift */; };
 		A3D85B981E9E67FC0037CDF0 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D85B971E9E67FC0037CDF0 /* JSON.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A31CA1731EC73EAE00023460 /* laminate_1_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = laminate_1_2.jpg; sourceTree = "<group>"; };
+		A31CA1741EC73EAE00023460 /* path_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = path_6.jpg; sourceTree = "<group>"; };
+		A31CA1751EC73EAE00023460 /* wallp_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wallp_0.jpg; sourceTree = "<group>"; };
+		A31CA17A1EC73FCB00023460 /* Other.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Other.swift; sourceTree = "<group>"; };
 		A36A955C1E841AA000BDE440 /* 5DPlannerTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 5DPlannerTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A36A955F1E841AA000BDE440 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A36A95611E841AA000BDE440 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -45,7 +53,7 @@
 		A36A95851E84397900BDE440 /* JSONData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = JSONData.json; sourceTree = "<group>"; };
 		A36A95B51E84412600BDE440 /* CustomScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScene.swift; sourceTree = "<group>"; };
 		A3D85B8D1E9E37070037CDF0 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Material.swift; path = 5DPlannerTask/Models/Material.swift; sourceTree = SOURCE_ROOT; };
-		A3D85B8F1E9E3D530037CDF0 /* TheWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TheWall.swift; path = 5DPlannerTask/Models/TheWall.swift; sourceTree = SOURCE_ROOT; };
+		A3D85B8F1E9E3D530037CDF0 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Node.swift; path = 5DPlannerTask/Models/Node.swift; sourceTree = SOURCE_ROOT; };
 		A3D85B911E9E3DCB0037CDF0 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Item.swift; path = 5DPlannerTask/Models/Item.swift; sourceTree = SOURCE_ROOT; };
 		A3D85B971E9E67FC0037CDF0 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = 5DPlannerTask/Models/JSON.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -68,12 +76,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A31CA1721EC73EAE00023460 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				A31CA1731EC73EAE00023460 /* laminate_1_2.jpg */,
+				A31CA1741EC73EAE00023460 /* path_6.jpg */,
+				A31CA1751EC73EAE00023460 /* wallp_0.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		A31CA1791EC73FAD00023460 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				A31CA17A1EC73FCB00023460 /* Other.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		A36279001E9B1191004E06D6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				A3D85B971E9E67FC0037CDF0 /* JSON.swift */,
 				A3D85B8D1E9E37070037CDF0 /* Material.swift */,
-				A3D85B8F1E9E3D530037CDF0 /* TheWall.swift */,
+				A3D85B8F1E9E3D530037CDF0 /* Node.swift */,
 				A3D85B911E9E3DCB0037CDF0 /* Item.swift */,
 			);
 			name = Models;
@@ -101,6 +127,7 @@
 		A36A955E1E841AA000BDE440 /* 5DPlannerTask */ = {
 			isa = PBXGroup;
 			children = (
+				A31CA1721EC73EAE00023460 /* Images */,
 				A36279001E9B1191004E06D6 /* Models */,
 				A36A955F1E841AA000BDE440 /* AppDelegate.swift */,
 				A36A95851E84397900BDE440 /* JSONData.json */,
@@ -110,6 +137,7 @@
 				A36A95661E841AA000BDE440 /* Assets.xcassets */,
 				A36A95681E841AA000BDE440 /* LaunchScreen.storyboard */,
 				A36A956B1E841AA000BDE440 /* Info.plist */,
+				A31CA1791EC73FAD00023460 /* Other */,
 			);
 			path = 5DPlannerTask;
 			sourceTree = "<group>";
@@ -206,8 +234,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A31CA1761EC73EAE00023460 /* laminate_1_2.jpg in Resources */,
 				A36A956A1E841AA000BDE440 /* LaunchScreen.storyboard in Resources */,
+				A31CA1781EC73EAE00023460 /* wallp_0.jpg in Resources */,
 				A36A95861E84397900BDE440 /* JSONData.json in Resources */,
+				A31CA1771EC73EAE00023460 /* path_6.jpg in Resources */,
 				A36A95671E841AA000BDE440 /* Assets.xcassets in Resources */,
 				A36A95651E841AA000BDE440 /* Main.storyboard in Resources */,
 			);
@@ -227,7 +258,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3D85B901E9E3D530037CDF0 /* TheWall.swift in Sources */,
+				A31CA17B1EC73FCB00023460 /* Other.swift in Sources */,
+				A3D85B901E9E3D530037CDF0 /* Node.swift in Sources */,
 				A36A95621E841AA000BDE440 /* ViewController.swift in Sources */,
 				A3D85B981E9E67FC0037CDF0 /* JSON.swift in Sources */,
 				A36A95601E841AA000BDE440 /* AppDelegate.swift in Sources */,

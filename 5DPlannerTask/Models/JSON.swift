@@ -9,6 +9,7 @@
 import UIKit
 
 class JSON: NSObject, DataExtractProtocol {
+    
     var projectName: String?
     var data: [String: AnyObject]?
     
@@ -50,8 +51,6 @@ class JSONData {
     }
 }
 
-
-    
     //    func extractItems(input: [String: AnyObject]) {
     //        if let items = extractData(input: input, using: "items") as? [AnyObject]  {
     //            for item in items {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SceneKit
 
 class Item: DataExtractProtocol {
     var items: [[String: AnyObject]]?
@@ -95,6 +94,7 @@ class Room: Floor {
 class Wall: Room {
     
     var w: CGFloat? //width
+    var points: [Point] = []
     
     override func extract(_ item: [String : AnyObject]) {
         if let value =  extractData(input: item, using: "w") as? CGFloat {
