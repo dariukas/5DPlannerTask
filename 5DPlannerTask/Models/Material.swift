@@ -9,7 +9,6 @@
 import UIKit
 import SceneKit
 
-
 class Materials: DataExtractProtocol {
     var materials: [String: AnyObject]?
     
@@ -59,8 +58,7 @@ class Material: DataExtractProtocol {
     
     init(_ data: [String: AnyObject]) {
         if let color = extractData(input: data, using: "color") as? String {
-            //self.color = UIColor(hexString: color)
-            //            print("Color: \(color)")
+            self.color = UIColor(hexString: color)
         }
         if let texture = extractData(input: data, using: "texture") as? String {
             self.imageName = texture
@@ -70,16 +68,17 @@ class Material: DataExtractProtocol {
     }
 }
 
+//convert hex color representation to UIColor
 extension UIColor {
     convenience init(hexString: String) {
-        var hex: UInt64 = 000000
-        
+        var hex: UInt64 = 000000 // UIColor.black in the case of other format
         if hexString.hasPrefix("#") {
             let start = hexString.index(hexString.startIndex, offsetBy: 1)
             let hexColor = hexString.substring(from: start)
-            hex = UInt64(hexColor)!
+            if let representation = UInt64(hexColor, radix:16) { //strtoul
+                hex = representation
+            }
         }
-        
         let components = (
             R: CGFloat((hex >> 16) & 0xff) / 255,
             G: CGFloat((hex >> 08) & 0xff) / 255,

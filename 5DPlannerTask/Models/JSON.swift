@@ -63,3 +63,23 @@ class JSONData {
     //    }
 //}
 
+protocol ExtractProtocol {
+    func extract(_ item: [String : AnyObject])
+}
+
+protocol DataExtractProtocol {
+    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject?
+}
+
+extension DataExtractProtocol {
+    //The method get the value using keyword (the basic method)
+    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject? {
+        if let value = input[keyword] {
+            return value
+        } else {
+            print("The key \(keyword) does not exist in dictionary.")
+            return nil
+            //return input as AnyObject
+        }
+    }
+}

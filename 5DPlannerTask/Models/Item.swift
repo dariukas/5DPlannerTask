@@ -32,15 +32,15 @@ class Item: DataExtractProtocol {
 
 class Project: Item {
     
-    var width: Float?
-    var height: Float?
+    var width: CGFloat?
+    var height: CGFloat?
     var ground: Material?
     
     func extract(_ data: [String: AnyObject]) {
-        if let width =  extractData(input: data, using: "width") as? Float {
+        if let width =  extractData(input: data, using: "width") as? CGFloat {
             self.width = width
         }
-        if let height =  extractData(input: data, using: "height") as? Float {
+        if let height =  extractData(input: data, using: "height") as? CGFloat {
             self.height = height
         }
         if let ground = extractData(input: data, using: "ground") as? [String: AnyObject]  {
@@ -62,21 +62,21 @@ class Floor: Item {
 
 class Room: Floor {
     
-    var x: CGFloat?
-    var y: CGFloat?
-    var z: CGFloat?
+    var x: Float?
+    var y: Float?
+    var z: Float?
     var sX: CGFloat?
     var sY: CGFloat?
     var h: CGFloat?
 
     override func extract(_ item: [String : AnyObject]) {
-        if let value =  extractData(input: item, using: "x") as? CGFloat {
+        if let value =  extractData(input: item, using: "x") as? Float {
             self.x = value
         }
-        if let value =  extractData(input: item, using: "y") as? CGFloat {
+        if let value =  extractData(input: item, using: "y") as? Float {
             self.y = value
         }
-        if let value =  extractData(input: item, using: "z") as? CGFloat {
+        if let value =  extractData(input: item, using: "z") as? Float {
             self.z = value
         }
         if let value =  extractData(input: item, using: "sX") as? CGFloat {
@@ -96,6 +96,14 @@ class Wall: Room {
     var w: CGFloat? //width
     var points: [Point] = []
     
+    override init(data: [String : AnyObject]) {
+        super.init(data: data)
+        for item in self.items! {
+            let point = Point(item)
+            self.points.append(point)
+        }
+    }
+    
     override func extract(_ item: [String : AnyObject]) {
         if let value =  extractData(input: item, using: "w") as? CGFloat {
             self.w = value
@@ -103,12 +111,12 @@ class Wall: Room {
     }
 }
 
-class Point: Wall {
+class Point: DataExtractProtocol {
     
     var pointX: CGFloat?
     var pointY: CGFloat?
     
-    override func extract(_ item: [String : AnyObject]) {
+    init(_ item: [String : AnyObject]) {
         if let value =  extractData(input: item, using: "x") as? CGFloat {
             self.pointX = value
         }
@@ -116,4 +124,13 @@ class Point: Wall {
             self.pointY = value
         }
     }
+    
+//    override func extract(_ item: [String : AnyObject]) {
+//        if let value =  extractData(input: item, using: "x") as? CGFloat {
+//            self.pointX = value
+//        }
+//        if let value = extractData(input: item, using: "y") as? CGFloat {
+//            self.pointY = value
+//        }
+//    }
 }

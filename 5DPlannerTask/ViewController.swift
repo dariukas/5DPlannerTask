@@ -17,8 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //render()
-        run()
+        render()
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,66 +29,5 @@ class ViewController: UIViewController {
         sceneView.scene = CustomScene()
         //sceneView.backgroundColor = UIColor.black
         sceneView.allowsCameraControl = true
-    }
-    
-    func run() {
-        //let data: [String : AnyObject]=[:]
-            let input = JSONData.parseJSON(fileName: "JSONData")
-            let json = JSON(input: input)
-            let project = Project(dataWithoutMaterial: json.data!)
-            project.extract(json.data!)
-            
-            for item in project.items! {
-                let floor = Floor(dataWithoutMaterial: item)
-                floor.extract(item)
-                for item in floor.items! {
-                    let room = Room(data: item)
-                    room.extract(item)
-                    for item in room.items! {
-                        let wall = Wall(data: item)
-                        wall.extract(item)
-                        
-                        for item in wall.items! {
-                           let point = Point(data: item)
-                            point.extract(item)
-                            wall.points.append(point)
-                        }
-                        
-                        let wallNode = WallNode()
-                        wallNode.setup(wall: wall)
-//                        node.addChildNode(wallNode)
-                    }
-                }
-            }
-        
-        //print(parseJSON(fileName: "JSONData"))
-//        let json = JSON()
-        //json.extract(fileName: "JSONData")
-        
-        
-        //JSON(input: input)
-        
-        //        let project = Project(json: JSON(fileName: "JSONData"))
-    }
-}
-
-protocol ExtractProtocol {
-    func extract(_ item: [String : AnyObject])
-}
-
-protocol DataExtractProtocol {
-    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject?
-}
-
-extension DataExtractProtocol {
-    //The method get the value using keyword (the basic method)
-    func extractData(input: [String: AnyObject], using keyword: String) -> AnyObject? {
-        if let value = input[keyword] {
-            return value
-        } else {
-            print("The key \(keyword) does not exist in dictionary.")
-            return nil
-            //return input as AnyObject
-        }
     }
 }

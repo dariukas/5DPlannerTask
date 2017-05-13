@@ -6,6 +6,8 @@
 //  Copyright © 2017 Darius Miliauskas. All rights reserved.
 //
 
+
+
 import UIKit
 import SceneKit
 
@@ -16,6 +18,7 @@ class CustomScene: SCNScene {
         //let scene = SCNScene(named: "sphere.obj")!
         //let scnView = self as! SCNView
         setupScene()
+        setObjects()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,24 +27,60 @@ class CustomScene: SCNScene {
     }
     
     func setupScene() {
-        let omniLight = LightNode(type: .omni)
-        omniLight.position = SCNVector3(x: 0, y: 10, z: 10)
-        self.rootNode.addChildNode(omniLight)
+//        let omniLight = LightNode(type: .omni)
+//        omniLight.position = SCNVector3(x: 0, y: 500, z: 500)
+//        self.rootNode.addChildNode(omniLight)
         
         let ambientLight = LightNode(type: .ambient)
-        ambientLight.color = UIColor.darkGray
+        ambientLight.light?.color = UIColor.darkGray
         self.rootNode.addChildNode(ambientLight)
         
         let camera = CameraNode()
-        camera.position = SCNVector3(x: 0, y: 0, z: 15)
+        camera.position = SCNVector3(x: 2000, y: 2000, z: 1500)
         self.rootNode.addChildNode(camera)
 
         setupEnviromentLights()
     }
     
+    func setObjects() {
+        //let data: [String : AnyObject]=[:]
+        let input = JSONData.parseJSON(fileName: "JSONData")
+        let json = JSON(input: input)
+        let project = Project(dataWithoutMaterial: json.data!)
+        project.extract(json.data!)
+        
+        let groundNode = GroundNode(project)
+        self.rootNode.addChildNode(groundNode)
+        
+        for item in project.items! {
+            let floor = Floor(dataWithoutMaterial: item)
+            floor.extract(item)
+            for item in floor.items! {
+                let room = Room(data: item)
+                room.extract(item)
+                
+                let roomNode = RoomNode(room)
+                groundNode.addChildNode(roomNode)
+                
+                for item in room.items! {
+                    let wall = Wall(data: item)
+                    wall.extract(item)
+                    wall.h = room.h
+                    
+                    let wallNode = WallNode(wall)
+                    roomNode.addChildNode(wallNode)
+                }
+                
+                if let roomMaterials = room.materials?.materials,  let firstWallNode = roomNode.childNodes.first as? WallNode {
+                    let floorNode = FloorNode(side: firstWallNode.width, material: roomMaterials["floor"] as? Material)
+                    roomNode.addChildNode(floorNode)
+                }
+            }
+        }
+    }
+    
     private func setupEnviromentLights() {
-        let environment = UIImage(named: "IBL.png")
-        self.lightingEnvironment.contents = environment
+        self.lightingEnvironment.contents = UIImage(named: "environment.jpg")
         self.lightingEnvironment.intensity = 2.0
     }
 }
