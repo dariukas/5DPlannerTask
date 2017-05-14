@@ -8,6 +8,8 @@
 
 //https://medium.com/@avihay/amazing-physically-based-rendering-using-the-new-ios-10-scenekit-2489e43f7021#.vdapbrnj7
 //https://www.weheartswift.com/introduction-scenekit-part-1/
+//http://stackoverflow.com/questions/27509092/scnbox-different-colour-or-texture-on-each-face
+//http://stackoverflow.com/questions/39439216/swift-must-call-a-designated-initializer-of-the-superclass-error-even-though
 
 import Foundation
 

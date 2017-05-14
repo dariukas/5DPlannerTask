@@ -6,8 +6,6 @@
 //  Copyright © 2017 Darius Miliauskas. All rights reserved.
 //
 
-
-
 import UIKit
 import SceneKit
 
