@@ -36,13 +36,19 @@ class CustomScene: SCNScene {
         self.rootNode.addChildNode(ambientLight)
         
         let camera = CameraNode()
-        camera.position = SCNVector3(x: 2000, y: 2000, z: 1500)
+        camera.position = SCNVector3(x: 2550, y: 1500, z: 900)
+        camera.eulerAngles = SCNVector3(x: 0.8, y: 0, z: 0.6)
+        //camera.rotation = SCNVector4(x: 0, y: 2, z: 0, w: 0)
         self.rootNode.addChildNode(camera)
 
         setupEnviromentLights()
     }
     
     func setObjects() {
+        
+        let skydomeNode = Skydome()
+        self.rootNode.addChildNode(skydomeNode)
+        
         //let data: [String : AnyObject]=[:]
         let input = JSONData.parseJSON(fileName: "JSONData")
         let json = JSON(input: input)

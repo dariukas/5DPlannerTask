@@ -114,7 +114,7 @@ class FloorNode: SCNNode {
         }
         //self.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
         self.geometry = geometry
-        self.position = SCNVector3(x: Float(side/2), y: Float(side/2), z: 1.0)
+        self.position = SCNVector3(x: Float(side/2), y: Float(side/2), z: 3.0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -183,18 +183,24 @@ class WallNode: SCNNode {
     }
 }
 
-class SphereNode: SCNNode {
-    var radius: CGFloat? = 1.0
-    var color: UIColor?
-    var material: Material?
+class Skydome: SCNNode {
     
-    convenience override init() {
-        self.init()
-        if let radius = radius, let imageName = material?.imageName, let color = material?.color {
-            let sphereGeometry = SCNSphere(radius: radius)
-            sphereGeometry.firstMaterial?.diffuse.contents = color
-            sphereGeometry.firstMaterial?.diffuse.contents = UIImage(named: imageName)
-        }
+    override init() {
+        super.init()
+        let geometry = SCNSphere(radius: 8000.0)
+        let material = SCNMaterial()
+        //material.diffuse.contents = UIImage(named: "environment.jpg")
+        material.diffuse.contents = UIColor.blue
+        material.isDoubleSided = true
+        geometry.firstMaterial = material
+//        material.diffuse.contentsTransform = SCNMatrix4MakeScale(20, 20, 20)
+//        material.diffuse.wrapS = .repeat
+//        material.diffuse.wrapT = .repeat
+        self.geometry = geometry
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
 }
-
